@@ -1,0 +1,21 @@
+Postgres commands
+psql - logs you into the postgres cli
+    psql aleck aleck
+    psql *databaseName* *userName*
+\q - quits the CLI
+\l - list of DBs
+\du - list of users
+\dt - lists tables for current database
+\d tableName - lists details of table
+\c databaseName - connects to the named DB
+
+Steps for starting a DB project
+1. Create (decide on using an already existing) user
+    CREATE USER username WITH attributes;
+2. Create the database
+    CREATE DATABASE databasename WITH OWNER username;
+3. Create tables
+    CREATE TABLE tablename (
+        columnnames datatypes [constraints]
+    );
+4. Insert data into tables
