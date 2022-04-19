@@ -101,3 +101,22 @@ VALUES
 -- SELECT * FROM boardgames
 -- JOIN reviews ON (boardgames.id = reviews.boardgame_id)
 -- WHERE avg_rating > 8.5;
+
+CREATE TABLE lfg (
+    id SERIAL PRIMARY KEY,
+    player_id INTEGER,
+    game_id INTEGER,
+    FOREIGN KEY (player_id) REFERENCES players,
+    FOREIGN KEY (game_id) REFERENCES boardgames
+);
+
+INSERT INTO lfg (player_id, game_id)
+VALUES
+    (1, 5),
+    (1, 2),
+    (3, 1),
+    (5, 5),
+    (2, 2),
+    (4, 4),
+    (6, 4),
+    (1, 4);
