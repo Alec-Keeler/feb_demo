@@ -1,5 +1,5 @@
 -- Run file using this command from root directory of repo: 
--- psql -d aleck < sql/debug_test_1.sql
+-- psql -d boardgame_dev < sql/debug_test_1.sql
 
 DROP TABLE IF EXISTS players;
 
@@ -7,12 +7,12 @@ DROP TABLE IF EXISTS players;
 CREATE TABLE players (
     id SERIAL PRIMARY KEY,
     name VARCHAR(200) UNIQUE NOT NULL,
-    age NOT NULL INTEGER,
+    age INTEGER NOT NULL,
     fave_category VARCHAR(50) NOT NULL
 );
 
 -- documentation: https://www.postgresql.org/docs/current/sql-insert.html
-INSERT INTO players (name, fave_category, age)
+INSERT INTO players (name, age, fave_category)
 VALUES
 ('Alec', 32, 'Strategy'),
 ('Dan', 59, 'Cooperative'),

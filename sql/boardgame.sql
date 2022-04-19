@@ -4,6 +4,7 @@
 -- Task 2d
 DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS boardgames;
+DROP TABLE IF EXISTS players;
 
 -- Task 2a
 CREATE TABLE boardgames (
@@ -14,6 +15,13 @@ CREATE TABLE boardgames (
     category VARCHAR(50)
 );
 
+-- Task 2b
+CREATE TABLE players (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(200) UNIQUE NOT NULL,
+    fave_category VARCHAR(50) NOT NULL
+);
+
 -- Task 2c
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
@@ -21,6 +29,7 @@ CREATE TABLE reviews (
     boardgame_id INTEGER REFERENCES boardgames (id)
 );
 
+-- Task 3
 INSERT INTO boardgames (name, avg_rating, max_players, category)
 VALUES
     ('Gloomhaven', 8.8, 4, 'Adventure'),
@@ -38,3 +47,35 @@ VALUES
     ('This game is far too long!', 5),
     ('My friends and I really like this game, lots of replayability', 6),
     ('I can be a space pirate, favorite game hands down.', 5);
+
+ALTER TABLE players ADD COLUMN 
+prefers_video_games BOOLEAN DEFAULT false;
+
+INSERT INTO players (name, fave_category, prefers_video_games)
+VALUES
+    ('Alec', 'Strategy', DEFAULT),
+    ('Dan', 'Cooperative', false),
+    ('Ray', 'Adventure', true),
+    ('Rawaha', 'Economic', DEFAULT),
+    ('Autumn', 'Strategy', DEFAULT),
+    ('Javier', 'Economic', DEFAULT);
+
+-- Task 4a
+-- SELECT * FROM boardgames;
+
+-- Task 4b
+-- SELECT name, category FROM boardgames;
+
+-- Task 4c (4e)
+-- SELECT name, avg_rating FROM boardgames
+-- WHERE category = 'Strategy';
+
+-- Task 4d
+-- SELECT name, avg_rating FROM boardgames
+-- WHERE avg_rating BETWEEN 8.66 AND 9.00;
+
+-- Task 4f
+SELECT id, name, category FROM boardgames
+WHERE category IN ('Adventure', 'Strategy')
+ORDER BY category DESC
+LIMIT 2;
