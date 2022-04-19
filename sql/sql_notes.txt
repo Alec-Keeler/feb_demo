@@ -19,3 +19,6 @@ Steps for starting a DB project
         columnnames datatypes [constraints]
     );
 4. Insert data into tables
+    INSERT INTO tablename (col1, col2, col3)
+    VALUES
+    (data1, data2, data3);
