@@ -7,8 +7,7 @@ DROP TABLE IF EXISTS players;
 CREATE TABLE players (
     id SERIAL PRIMARY KEY,
     name VARCHAR(200) UNIQUE NOT NULL,
-    -- age NOT NULL INTEGER,
-    age INTEGER NOT NULL,
+    age NOT NULL INTEGER,
     fave_category VARCHAR(50) NOT NULL
 );
 
