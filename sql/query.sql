@@ -9,6 +9,7 @@
 --  Twilight Imperium: Fourth Edition
 -- (1 row)
 
--- Test your query by running the following command from your terminal in the root directory of the repo:
+-- Test your query by running the following command from the root directory of the repo:
 -- psql -d boardgame_dev < sql/query.sql
+
 -- Your code below:
