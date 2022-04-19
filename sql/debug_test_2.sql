@@ -11,11 +11,11 @@
 -- (3 rows)
 
 -- Test the query using the following command:
--- psql -d boardgame_dev < sql/debug_test_2
+-- psql -d boardgame_dev < sql/debug_test_2.sql
 
 SELECT players.name
 FROM players
-JOIN boardgames ON (lfg.game_id = boardgame.id)
 JOIN lfg ON (players.id = lfg.player_id)
+JOIN boardgames ON (lfg.game_id = boardgames.id)
 WHERE boardgames.name = 'Terraforming Mars'
 ORDER BY name;
