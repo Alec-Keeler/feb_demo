@@ -96,3 +96,8 @@ VALUES
 -- Task 5b
 -- DELETE FROM boardgames
 -- WHERE id = 3;
+
+-- Task 6a
+-- SELECT * FROM boardgames
+-- JOIN reviews ON (boardgames.id = reviews.boardgame_id)
+-- WHERE avg_rating > 8.5;
