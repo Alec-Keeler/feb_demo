@@ -81,5 +81,18 @@ VALUES
 -- LIMIT 2;
 
 -- Task 4e
-SELECT * FROM reviews
-WHERE content ILIKE '%t%';
+-- SELECT * FROM reviews
+-- WHERE content ILIKE '%t%';
+
+-- Task 5a
+-- UPDATE players
+-- SET prefers_video_games = true
+-- WHERE name IN ('Alec', 'Javier');
+
+-- UPDATE boardgames
+-- SET name = name || ' (Game of the Year!)'
+-- WHERE avg_rating > 8.70;
+
+-- Task 5b
+-- DELETE FROM boardgames
+-- WHERE id = 3;
