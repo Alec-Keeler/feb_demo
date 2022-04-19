@@ -75,7 +75,11 @@ VALUES
 -- WHERE avg_rating BETWEEN 8.66 AND 9.00;
 
 -- Task 4f
-SELECT id, name, category FROM boardgames
-WHERE category IN ('Adventure', 'Strategy')
-ORDER BY category DESC
-LIMIT 2;
+-- SELECT id, name, category FROM boardgames
+-- WHERE category IN ('Adventure', 'Strategy')
+-- ORDER BY category DESC
+-- LIMIT 2;
+
+-- Task 4e
+SELECT * FROM reviews
+WHERE content ILIKE '%t%';

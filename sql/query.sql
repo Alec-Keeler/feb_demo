@@ -13,3 +13,7 @@
 -- psql -d boardgame_dev < sql/query.sql
 
 -- Your code below:
+
+SELECT name FROM boardgames
+ORDER BY name DESC
+LIMIT 1;
