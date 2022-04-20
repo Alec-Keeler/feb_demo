@@ -1,0 +1,14 @@
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const Post = sequelize.define('Post', {
+    breadditorId: DataTypes.INTEGER,
+    pinned: DataTypes.BOOLEAN,
+    title: DataTypes.STRING,
+    content: DataTypes.TEXT
+  }, {});
+  Post.associate = function(models) {
+    // associations can be defined here
+    Post.belongsTo(models.Breadditor, { foreignKey: 'breadditorId' })
+  };
+  return Post;
+};

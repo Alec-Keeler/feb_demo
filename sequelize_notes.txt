@@ -1,0 +1,51 @@
+If starting from scratch
+Task 9a
+Step 1: npm init -y
+
+Step 2: install necessary packages
+    sequelize@^5.0.0
+    sequelize-cli@^5.0.0
+    pg 8.6.0 or later
+
+Step 3: initialize sequelize
+    npx sequelize-cli init
+
+Step 4: Configure Sequelize
+    username
+    password
+    database
+    dialect (postgres)
+    add: "seederStorage": "sequelize"
+
+Step 5: Create models/migrations
+    npx sequelize model:generate --name ModelName --attributes col1:dataType
+    migration - in charge of building the table in the database
+        capitalized and plural
+    model - in charge of interacting with the table
+        capitalized and singular
+
+Step 6: Run migrations
+    npx sequelize db:migrate
+    npx sequelize db:migrate:undo:all
+
+Step 7: Create associations
+    hasOne/belongsTo
+    hasMany/belongsTo
+    belongsToMany
+
+Step 8: Seed data
+    npx sequelize seed:generate --name someName
+    npx sequelize db:seed:all
+    npx sequelize db:seed:undo:all
+
+To rebuild database:
+    npx sequelize db:seed:undo:all
+    npx sequelize db:migrate:undo:all
+    npx sequelize db:migrate
+    npx sequelize db:seed:all
+
+alternatively:
+    npx sequelize db:drop
+    npx sequelize db:create
+    npx sequelize db:migrate
+    npx sequelize db:seed:all

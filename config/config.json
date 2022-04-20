@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "breaddit_app",
+    "password": "hashbrowns",
+    "database": "breaddit_dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "seederStorage": "sequelize"
+  },
+  "test": {
+    "username": "breaddit_app",
+    "password": "hashbrowns",
+    "database": "breaddit_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  },
+  "production": {
+    "username": "breaddit_app",
+    "password": "hashbrowns",
+    "database": "breaddit_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}
