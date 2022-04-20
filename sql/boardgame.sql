@@ -2,6 +2,7 @@
 -- psql -d boardgame_dev < sql/boardgame.sql
 
 -- Task 2d
+DROP TABLE IF EXISTS lfg;
 DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS boardgames;
 DROP TABLE IF EXISTS players;
@@ -120,3 +121,38 @@ VALUES
     (4, 4),
     (6, 4),
     (1, 4);
+
+
+-- Task 7a
+-- SELECT boardgames.name FROM boardgames
+-- JOIN reviews ON (boardgames.id = reviews.boardgame_id)
+-- WHERE content ILIKE 't%';
+
+-- SELECT name FROM boardgames
+-- WHERE id IN (
+--     SELECT boardgame_id FROM reviews
+--     WHERE content ILIKE 't%'
+-- );
+
+SELECT players.name
+FROM players
+JOIN lfg ON (players.id = lfg.player_id)
+JOIN boardgames ON (lfg.game_id = boardgames.id)
+WHERE boardgames.name = 'Terraforming Mars';
+
+SELECT players.name FROM players
+WHERE id IN (
+    SELECT player_id FROM lfg
+    WHERE game_id = (
+        SELECT id FROM boardgames
+        WHERE boardgames.name = 'Terraforming Mars'
+    )
+);
+
+-- Given name of a player, query DB for games they like
+-- Task 7b
+SELECT boardgames.name FROM boardgames
+WHERE category = (
+    SELECT fave_category FROM players
+    WHERE players.name = 'Alec'
+);
