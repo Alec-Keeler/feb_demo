@@ -122,3 +122,14 @@ async function deleteUser(breadditorId) {
 }
 
 // deleteUser(5)
+
+// Task 15a
+async function profilePage(breadditorId) {
+    const user = await Breadditor.findByPk(breadditorId, {
+        include: Post
+    })
+
+    console.log(JSON.stringify(user, null, 2))
+}
+
+profilePage(2)
