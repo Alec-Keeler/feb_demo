@@ -1,5 +1,5 @@
 // Task 12a
-const { Breadditor, Post, Sequelize: {Op} } = require('./models');
+const { Breadditor, Post, Subbreaddit, Sequelize: {Op} } = require('./models');
 
 // Task 12b
 async function createBreadditor(name, email, country, password) {
@@ -132,4 +132,32 @@ async function profilePage(breadditorId) {
     console.log(JSON.stringify(user, null, 2))
 }
 
-profilePage(2)
+// profilePage(2)
+
+// Task 15b
+async function findUserSubscriptions(breadditorId) {
+    const user = await Breadditor.findByPk(breadditorId, {
+        include: [Subbreaddit, Post]
+    })
+
+    console.log('FIRST: ', JSON.stringify(user, null, 2))
+}
+
+// findUserSubscriptions(1)
+
+// Find a breadditor, the subbreaddits they are subscribed to, and the posts that 
+// belong to each associated subbreaddit
+
+// Task 15c
+async function findStuff(breadditorId) {
+    const user = await Breadditor.findByPk(breadditorId, {
+        include: {
+            model: Subbreaddit,
+            include: {model: Post}
+        }
+    })
+
+    console.log('SECOND: ', JSON.stringify(user, null, 2))
+}
+
+findStuff(2)
