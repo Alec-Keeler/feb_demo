@@ -9,6 +9,16 @@ module.exports = (sequelize, DataTypes) => {
   Breadditor.associate = function(models) {
     // associations can be defined here
     Breadditor.hasMany(models.Post, { foreignKey: 'breadditorId' })
+    Breadditor.belongsToMany(models.Subbreaddit, {
+      through: 'Subscription',
+      foreignKey: 'breadditorId',
+      otherKey: 'subId'
+    })
   };
   return Breadditor;
 };
+
+// SELECT * FROM breadditors
+// JOIN subscriptions ON (breadditors.id = subscriptions.breadditorId)
+// JOIN subbreaddits ON (subscriptions.subId = subbreaddits.id)
+// WHERE
