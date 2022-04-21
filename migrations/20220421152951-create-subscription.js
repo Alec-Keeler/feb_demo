@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Posts', {
+    return queryInterface.createTable('Subscriptions', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,19 +11,7 @@ module.exports = {
       breadditorId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {model: 'Breadditors'}
-      },
-      pinned: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
-      },
-      title: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      content: {
-        allowNull: false,
-        type: Sequelize.TEXT
+        references: { model: 'Breadditors' }
       },
       subId: {
         allowNull: false,
@@ -41,6 +29,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Posts');
+    return queryInterface.dropTable('Subscriptions');
   }
 };

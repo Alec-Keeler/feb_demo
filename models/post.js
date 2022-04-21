@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
     breadditorId: DataTypes.INTEGER,
     pinned: DataTypes.BOOLEAN,
     title: DataTypes.STRING,
-    content: DataTypes.TEXT
+    content: DataTypes.TEXT,
+    subId: DataTypes.INTEGER
   }, {});
   Post.associate = function(models) {
     // associations can be defined here

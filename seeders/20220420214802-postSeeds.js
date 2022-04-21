@@ -14,6 +14,7 @@ module.exports = {
       content: 'Brioche, Broa, Battlestar Galactica',
       pinned: true,
       breadditorId: 2,
+      subId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -22,6 +23,7 @@ module.exports = {
       content: 'All of them, obvs.',
       pinned: true,
       breadditorId: 1,
+      subId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -30,6 +32,7 @@ module.exports = {
       content: 'plz help',
       pinned: false,
       breadditorId: 3,
+      subId: 3,
       createdAt: new Date(),
       updatedAt: new Date()
     },
