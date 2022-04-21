@@ -102,3 +102,23 @@ async function orderResults() {
 }
 
 // orderResults()
+
+// Task 14a
+async function editPost(postId, newTitle) {
+    const post = await Post.findByPk(postId)
+
+    post.title = newTitle
+
+    await post.save()
+}
+
+// editPost(4, 'What kind of bread should I bake today')
+
+// Task 14b
+async function deleteUser(breadditorId) {
+    const breadditor = await Breadditor.findByPk(breadditorId)
+
+    await breadditor.destroy()
+}
+
+// deleteUser(5)
