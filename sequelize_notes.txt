@@ -53,3 +53,6 @@ alternatively:
 Query methods
     create
     build + save
+    findAll
+    findOne - great if you know you can only get back one record
+    findByPk - great with primary key
