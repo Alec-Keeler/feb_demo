@@ -1,1 +1,21 @@
-for notes
+Common operators
+
+* = 0 or more
++ = 1 or more
+? = 0 or 1
+\ = escape next character
+. = Any Character
+^ = start of input
+$ = end of input
+[] = list of optional characters
+[a-zA-Z0-9] = range of characters [A-z]
+[^] = exclude listed characters
+() = group of characters
+{3}, {3, 5} = matches specific number/range of numbers of a character set
+[abc]{3, 5}
+
+Short hand
+\w = any word character (letters, digits, _)
+\d = any digit 
+\s = any whitespace character
+
