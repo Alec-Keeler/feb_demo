@@ -1,6 +1,7 @@
 Step 1
     Install express
     install pug
+    install nodemon
 
 Step 2
     Create our app.js
@@ -15,6 +16,9 @@ Step 5
     Set up app to listen to a port
     Add a start script to package.json
 
+Step 6
+    app.set('view engine', 'pug')
+
 Express route methods
     get
     post
@@ -23,6 +27,7 @@ Express route methods
     all
 
     use
+    set
 
 Express response methods
     send
