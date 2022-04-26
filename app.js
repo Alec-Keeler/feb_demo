@@ -12,6 +12,13 @@ app.get('/', (req, res) => {
     res.render('home', {title: 'Breaddit', header: 'Welcome to Breaddit\'s Home Page'})
 })
 
+const data = {
+    1: 'This is your first response',
+    2: ['Blue', 'Green', 'Orange']
+};
+
+// Student Task Code
+
 // Task 20a
 app.get('/users', async(req, res) => {
     const breadditors = await Breadditor.findAll()
