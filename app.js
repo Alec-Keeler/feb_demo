@@ -54,6 +54,8 @@ app.get('/:num1/:num2/:num3', (req, res) => {
 //     res.render('profile', {breadditor: user, title: 'Profile Page'})
 // })
 
+
+// W11D2 Project
 // good
 // /valid
 // /thisisok
@@ -66,7 +68,8 @@ app.get('/:num1/:num2/:num3', (req, res) => {
 // /thisisabad/1/2
 
 app.all('*', (req, res) => {
-    console.log('catch all')
+    // console.log('catch all')
+    res.send('404 page not found')
 })
 
 
