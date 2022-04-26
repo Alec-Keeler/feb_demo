@@ -1,0 +1,31 @@
+Step 1
+    Install express
+    install pug
+
+Step 2
+    Create our app.js
+
+Step 3
+    import the express package
+
+Step 4
+    Create the app object
+
+Step 5
+    Set up app to listen to a port
+    Add a start script to package.json
+
+Express route methods
+    get
+    post
+    put/patch
+    delete
+    all
+
+    use
+
+Express response methods
+    send
+    render
+    redirect
+    json
