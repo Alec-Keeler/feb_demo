@@ -9,7 +9,7 @@ const csrfProtection = csrf({cookie: true})
 // Task 26a
 router.get('/new', csrfProtection, async(req, res) => {
     const subs = await Subbreaddit.findAll()
-    res.render('create-post', {subs, csrfToken: req.csrfToken()})
+    res.render('create-post', {subs, csrfToken: req.csrfToken(), errors: [], data: {}})
 })
 
 const errorArray = (req, res, next) => {
@@ -17,31 +17,49 @@ const errorArray = (req, res, next) => {
     next()
 }
 
-const emailCheck = (req, res, next) => {
-    const email = req.body.email
-    const exp = /^[\w-\.]+@[A-z]+\.[A-z]{2,3}$/
+// const emailCheck = (req, res, next) => {
+//     const email = req.body.email
+//     const exp = /^[\w-\.]+@[A-z]+\.[A-z]{2,3}$/
 
-    const isEmail = email.test(exp)
-    if (isEmail) {
-        next()
-    } else {
-        req.errors.push('Please provide a valid email')
-        next()
+//     const isEmail = email.test(exp)
+//     if (isEmail) {
+//         next()
+//     } else {
+//         req.errors.push('Please provide a valid email')
+//         next()
+//     }
+// }
+
+const titleCheck = (req, res, next) => {
+    const title = req.body.title;
+
+    if (title.length < 1) {
+        req.errors.push('You must provide a title')
+    } if (title.length < 5) {
+        req.errors.push('Your title must have at least 5 characters')
     }
+    next()
 }
 
-router.post('/', csrfProtection, errorArray, emailCheck, async(req, res) => {
+router.post('/', csrfProtection, errorArray, titleCheck, async(req, res) => {
     console.log('You have arrived at the post post route')
     console.log(req.errors)
+    console.log("body: ", req.body)
     const { title, content, subId } = req.body;
 
-    const post = await Post.create({
-        title,
-        content,
-        subId,
-        pinned: false,
-        breadditorId: 1
-    })
+    if (req.errors) {
+        const subs = await Subbreaddit.findAll()
+        res.render('create-post', { subs, csrfToken: req.csrfToken(), errors: req.errors, data: req.body })
+    } else {
+        const post = await Post.create({
+            title,
+            content,
+            subId,
+            pinned: false,
+            breadditorId: 1
+        })
+        res.redirect('/users')
+    }
 })
 
 

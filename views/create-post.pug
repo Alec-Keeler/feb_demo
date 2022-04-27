@@ -1,14 +1,17 @@
 extends layout.pug
 
 block mainContent
+    if errors.length > 0
+        each err in errors
+            p= err
     form(action="/posts" method="post") 
         input(type="hidden" name="_csrf" value=csrfToken)
         label Title: 
-        input(type="text" name="title")
+        input(type="text" name="title" value=data.title)
         label Content: 
-        input(type="text" name="content")
+        input(type="text" name="content" value=data.content)
         label Subbreaddit: 
         select(name="subId")
             each sub in subs
-                option(value=sub.id)= sub.name
+                option(value=sub.id selected=(`${sub.id}` === data.subId))= sub.name
         button Submit
