@@ -1,5 +1,6 @@
 // Task 17a
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const { Breadditor } = require('./models');
 const userRouter = require('./routes/users.js');
 const postRouter = require('./routes/posts.js');
@@ -9,6 +10,16 @@ app.set('view engine', 'pug')
 // Task 23
 app.use(express.static('./public'))
 
+// Task 28a
+app.use(express.urlencoded({extended: false}))
+
+app.use(cookieParser())
+// Task 27a
+app.use((req, res, next) => {
+    // console.log('MIDDLEWARE TEST')
+    req.banana = true
+    next()
+})
 // Task 21b
 app.use('/users', userRouter)
 app.use('/breadditors', userRouter)

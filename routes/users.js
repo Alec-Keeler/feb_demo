@@ -3,10 +3,36 @@ const express = require('express');
 const { Breadditor } = require('../models');
 const router = express.Router();
 
-// Task 20a
-router.get('/', async (req, res) => {
-    const breadditors = await Breadditor.findAll()
+// task 27b
+router.use((req, res, next) => {
+    if (req.banana) {
+        req.potato = false
+    } else {
+        req.potato = true
+    }
+    next()
+})
 
+// Task 27c
+const routeMiddleware = (req, res, next) => {
+    if (req.potato) {
+        console.log('ERROR D:')
+    } else {
+        console.log('Successful check!')
+        next()
+    }
+
+}
+
+// Task 20a
+router.get('/', routeMiddleware, async (req, res, next) => {
+    const breadditors = await Breadditor.findAll()
+    if (req.banana) {
+        console.log('BANANA IS NOT A LIE')
+        console.log(req.potato)
+    } else {
+        console.log('BANANA IS A LIE D:')
+    }
     res.render('users', { title: 'Breaddit', breadditors: breadditors })
 })
 

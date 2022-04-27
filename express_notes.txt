@@ -34,3 +34,14 @@ Express response methods
     render
     redirect
     json
+
+csrfProtection
+    npm packages
+        csurf
+        cookie-parser
+
+        const csrf = require('csurf');
+
+        const csrfProtection = csrf({cookie: true})
+
+        input(type="hidden" name="_csrf" value=csrfToken)

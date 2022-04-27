@@ -2,6 +2,7 @@ extends layout.pug
 
 block mainContent
     form(action="/posts" method="post") 
+        input(type="hidden" name="_csrf" value=csrfToken)
         label Title: 
         input(type="text" name="title")
         label Content: 
@@ -9,5 +10,5 @@ block mainContent
         label Subbreaddit: 
         select(name="subId")
             each sub in subs
-                option(value="") 
+                option(value=sub.id)= sub.name
         button Submit
