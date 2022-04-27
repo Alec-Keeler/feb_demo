@@ -1,9 +1,8 @@
-html 
-    head 
-        title= title
-    body
-        ul
-            li= breadditor.name
-            li= breadditor.email
-            li= breadditor.country
-            li= breadditor.password
+extends layout.pug
+
+include utils.pug
+block mainContent
+    table
+        +createTable
+        tbody
+            +userData(breadditor)

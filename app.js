@@ -2,13 +2,17 @@
 const express = require('express');
 const { Breadditor } = require('./models');
 const userRouter = require('./routes/users.js');
+const postRouter = require('./routes/posts.js');
 const app = express();
 // Task 19a
 app.set('view engine', 'pug')
+// Task 23
+app.use(express.static('./public'))
 
 // Task 21b
 app.use('/users', userRouter)
 app.use('/breadditors', userRouter)
+app.use('/posts', postRouter)
 
 // Task 18
 app.get('/', (req, res) => {

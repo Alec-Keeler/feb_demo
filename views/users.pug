@@ -1,10 +1,11 @@
-html 
-    head
-        title= title
-    body
-        each breadditor in breadditors
-            ul
-                li= breadditor.name
-                li= breadditor.email
-                li= breadditor.country
-                li= breadditor.password
+extends layout.pug
+
+block mainContent
+    include utils.pug
+    div.class-name#another-id.another-class
+    div(class='test-class' id='some-id')
+        table
+            +createTable
+            tbody
+                each breadditor in breadditors
+                    +userData(breadditor)

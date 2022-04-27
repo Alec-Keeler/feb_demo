@@ -35,3 +35,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+// const { Breadditor, Post, Subbreaddit, Subscription } = require('./models')
+// REMEMBER TO CHANGE IMPORT PATH

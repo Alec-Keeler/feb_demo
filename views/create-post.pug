@@ -1,0 +1,13 @@
+extends layout.pug
+
+block mainContent
+    form(action="/posts" method="post") 
+        label Title: 
+        input(type="text" name="title")
+        label Content: 
+        input(type="text" name="content")
+        label Subbreaddit: 
+        select(name="subId")
+            each sub in subs
+                option(value="") 
+        button Submit
