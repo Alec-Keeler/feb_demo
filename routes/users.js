@@ -1,6 +1,6 @@
 // Task 21a
 const express = require('express');
-const { Breadditor } = require('../models');
+const { Breadditor } = require('../db/models');
 const router = express.Router();
 
 // task 27b

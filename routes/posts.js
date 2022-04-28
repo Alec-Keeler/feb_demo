@@ -1,5 +1,5 @@
 const express = require('express');
-const { Breadditor, Post, Subbreaddit, Subscription } = require('../models')
+const { Breadditor, Post, Subbreaddit, Subscription } = require('../db/models')
 const router = express.Router();
 
 const csrf = require('csurf');
