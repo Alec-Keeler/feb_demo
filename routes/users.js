@@ -1,5 +1,6 @@
 // Task 21a
 const express = require('express');
+const asyncHandler = require('express-async-handler')
 const { Breadditor } = require('../db/models');
 const router = express.Router();
 
@@ -38,13 +39,13 @@ router.get('/', routeMiddleware, async (req, res, next) => {
 
 // /users/1
 // Task 20c
-router.get('/:id(\\d+)', async (req, res) => {
+router.get('/:id', asyncHandler(async (req, res, next) => {
     console.log(req.path)
     console.log(req.params)
     const user = await Breadditor.findByPk(req.params.id)
     // console.log(user)
     res.render('profile', { breadditor: user, title: 'Profile Page' })
-})
+}))
 
 router.get(/(stuff)?(house)?/, (req, res) => {
     console.log('hello this is stuff')

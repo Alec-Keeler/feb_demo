@@ -18,6 +18,13 @@ app.use(cookieParser())
 app.use((req, res, next) => {
     // console.log('MIDDLEWARE TEST')
     req.banana = true
+    const error = new Error('Custom Error D:')
+    // next(error)
+    next()
+})
+
+app.use((req, res, next) => {
+    console.log('Can we hit this middleware?')
     next()
 })
 // Task 21b
@@ -82,11 +89,27 @@ app.get('/:num1/:num2/:num3', (req, res) => {
 // /not/ok
 // /thisisabad/1/2
 
-app.all('*', (req, res) => {
-    // console.log('catch all')
+
+// Task 31
+app.use((req, res, next) => {
     res.send('404 page not found')
 })
 
+app.use((err, req, res, next) => {
+    console.log('hello from first error handler')
+    next(err) 
+    // next()
+})
+
+// app.all('*', (req, res) => {
+//     // console.log('catch all')
+//     res.send('404 page not found')
+// })
+
+app.use((err, req, res, next) => {
+    console.log(err.message)
+    res.send('check console for error')
+})
 
 // Task 17b
 // const port = 8081;
