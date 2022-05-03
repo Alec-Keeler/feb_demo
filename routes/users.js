@@ -31,9 +31,8 @@ const routeMiddleware = (req, res, next) => {
 // Task 20a
 router.get('/', routeMiddleware, async (req, res, next) => {
     const breadditors = await Breadditor.findAll()
-    if (req.banana) {
-        console.log('BANANA IS NOT A LIE')
-        console.log(req.potato)
+    if (req.session) {
+        console.log(req.session.auth)
     } else {
         console.log('BANANA IS A LIE D:')
     }
@@ -111,11 +110,22 @@ router.post('/login', csrfProtection, async (req, res) => {
     const isPassword = await bcrypt.compare(password, user.hashedPassword)
     if (user && isPassword) {
         console.log('successful login!')
+        req.session.auth = {
+            name: user.name,
+            userId: user.id
+        }
+        console.log('session: ', req.session)
         res.redirect('/users')
     } else {
         req.errors.push('Account validation failed.  Please Try again.')
         res.render('login', { csrfToken: req.csrfToken(), errors: req.errors, user: { email } })
     }
+})
+
+router.get('/logout', (req, res) => {
+    delete req.session.auth
+    req.session.save(() => res.redirect('/users'))
+    // res.redirect('/users')
 })
 
 

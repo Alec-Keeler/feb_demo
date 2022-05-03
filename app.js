@@ -1,6 +1,7 @@
 // Task 17a
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const { Breadditor } = require('./db/models');
 const userRouter = require('./routes/users.js');
 const postRouter = require('./routes/posts.js');
@@ -13,12 +14,18 @@ app.use(express.static('./public'))
 // Task 28a
 app.use(express.urlencoded({extended: false}))
 
-app.use(cookieParser())
+app.use(cookieParser('secretKey'))
+app.use(session({
+    secret: 'secretKey',
+    resave: false,
+    saveUninitialized: false
+}))
+//race condition
 // Task 27a
 app.use((req, res, next) => {
     // console.log('MIDDLEWARE TEST')
     req.banana = true
-    const error = new Error('Custom Error D:')
+    // const error = new Error('Custom Error D:')
     // next(error)
     next()
 })

@@ -6,8 +6,16 @@ const csrf = require('csurf');
 
 const csrfProtection = csrf({cookie: true})
 
+const requireAuth = (req, res, next) => {
+    if (req.session.auth) {
+        next()
+    } else {
+        res.redirect('/users/login')
+    }
+}
+
 // Task 26a
-router.get('/new', csrfProtection, async(req, res) => {
+router.get('/new', requireAuth, csrfProtection, async(req, res) => {
     const subs = await Subbreaddit.findAll()
     res.render('create-post', {subs, csrfToken: req.csrfToken(), errors: [], data: {}})
 })
@@ -56,7 +64,7 @@ router.post('/', csrfProtection, errorArray, titleCheck, async(req, res) => {
             content,
             subId,
             pinned: false,
-            breadditorId: 1
+            breadditorId: req.session.auth.userId
         })
         res.redirect('/users')
     }
