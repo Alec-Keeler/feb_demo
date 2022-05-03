@@ -1,0 +1,19 @@
+extends layout.pug 
+//- Task 33b
+block mainContent 
+    if errors.length > 0
+        each err in errors 
+            p= err
+    form(action="/users/signup" method="post")
+        input(type="hidden" name="_csrf" value=csrfToken)
+        label(for="name") Name
+        input(type="text" name="name" required value=user.name)
+        label(for="country") Country
+        input(type="text" name="country" value=user.country)
+        label(for="email") Email
+        input(type="text" name="email" required value=user.email)
+        label(for="password") Password
+        input(type="text" name="password" required)
+        label(for="confirmPassword") Confirm Password
+        input(type="text" name="confirmPassword" required)
+        button Sign Up

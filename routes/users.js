@@ -3,6 +3,8 @@ const express = require('express');
 const asyncHandler = require('express-async-handler')
 const { Breadditor } = require('../db/models');
 const router = express.Router();
+const csrf = require('csurf');
+const csrfProtection = csrf({ cookie: true });
 
 // task 27b
 router.use((req, res, next) => {
@@ -39,7 +41,7 @@ router.get('/', routeMiddleware, async (req, res, next) => {
 
 // /users/1
 // Task 20c
-router.get('/:id', asyncHandler(async (req, res, next) => {
+router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     console.log(req.path)
     console.log(req.params)
     const user = await Breadditor.findByPk(req.params.id)
@@ -47,8 +49,72 @@ router.get('/:id', asyncHandler(async (req, res, next) => {
     res.render('profile', { breadditor: user, title: 'Profile Page' })
 }))
 
-router.get(/(stuff)?(house)?/, (req, res) => {
-    console.log('hello this is stuff')
+// router.get(/(stuff)?(house)?/, (req, res) => {
+//     console.log('hello this is stuff')
+// })
+
+router.get('/signup', csrfProtection, (req, res) => {
+    res.render('signup', { csrfToken: req.csrfToken(), errors: [], user: {} })
 })
+
+const signUpValidator = (req, res, next) => {
+    const { name, email, password, confirmPassword } = req.body;
+    const emailReg = /^[^\s@]+@\w+\.[A-z]{2,3}$/
+    req.errors = [];
+
+    if (name.length < 2) {
+        req.errors.push('Please provide a longer name')
+    }
+    if (!emailReg.test(email)) {
+        req.errors.push('Please provide a valid email')
+    }
+    if (!(password === confirmPassword)) {
+        req.errors.push('Please make sure to type the same password both times!')
+    }
+
+    next()
+}
+
+router.post('/signup', csrfProtection, signUpValidator, async (req, res) => {
+    const { name, country, email, password,  } = req.body
+    if (req.errors.length > 0) {
+        res.render('signup', {
+            csrfToken: req.csrfToken(),
+            errors: req.errors,
+            user: req.body
+        })
+    } else {
+        //Perform password hashing before creating the user
+        // Task 35a
+        
+        const user = await Breadditor.create({
+            name, country, email, password
+        })
+        res.redirect('/users')
+    }
+})
+
+router.get('/login', csrfProtection, (req, res) => {
+    res.render('login', { csrfToken: req.csrfToken(), errors: [], user: {} })
+})
+
+router.post('/login', csrfProtection, async (req, res) => {
+    const { email, password } = req.body
+    req.errors = []
+    const user = await Breadditor.findOne({
+        where: {
+            email
+        }
+    })
+    //Fill out with password hashing
+    if (user && isPassword) {
+        console.log('successful login!')
+        res.redirect('/users')
+    } else {
+        req.errors.push('Account validation failed.  Please Try again.')
+        res.render('login', { csrfToken: req.csrfToken(), errors: req.errors, user: { email } })
+    }
+})
+
 
 module.exports = router;
