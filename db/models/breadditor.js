@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     country: DataTypes.STRING,
-    password: DataTypes.STRING
+    hashedPassword: DataTypes.STRING
   }, {});
   Breadditor.associate = function(models) {
     // associations can be defined here

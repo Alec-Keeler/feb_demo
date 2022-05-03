@@ -5,6 +5,7 @@ const { Breadditor } = require('../db/models');
 const router = express.Router();
 const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
+const bcrypt = require('bcryptjs');
 
 // task 27b
 router.use((req, res, next) => {
@@ -86,9 +87,9 @@ router.post('/signup', csrfProtection, signUpValidator, async (req, res) => {
     } else {
         //Perform password hashing before creating the user
         // Task 35a
-        
+        const hashedPassword = await bcrypt.hash(password, 12)
         const user = await Breadditor.create({
-            name, country, email, password
+            name, country, email, hashedPassword
         })
         res.redirect('/users')
     }
@@ -107,6 +108,7 @@ router.post('/login', csrfProtection, async (req, res) => {
         }
     })
     //Fill out with password hashing
+    const isPassword = await bcrypt.compare(password, user.hashedPassword)
     if (user && isPassword) {
         console.log('successful login!')
         res.redirect('/users')
