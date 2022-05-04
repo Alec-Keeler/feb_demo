@@ -3,8 +3,8 @@ extends layout.pug
 block mainContent
     .all-posts-container
         each post in posts
-            .single-post-container 
+            div(id=`post-container-${post.id}`).single-post-container
                 h2= post.title
                 p= post.content
-                if post.link 
-                    a(href=post.link)= post.link
+                if loggedInUser === post.breadditorId
+                    button(class='edit-btn' id=`edit-post-${post.id}`) Delete

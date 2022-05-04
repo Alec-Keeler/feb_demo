@@ -1,16 +1,22 @@
 const express = require('express');
 const { Breadditor, Post, Subbreaddit, Subscription } = require('../db/models')
 const router = express.Router();
+const asyncHandler = require('express-async-handler')
 
 const csrf = require('csurf');
+const { restart } = require('nodemon/lib/monitor/run');
 
 const csrfProtection = csrf({cookie: true})
 
 // Task 38
 router.get('/', asyncHandler(async (req, res) => {
     const posts = await Post.findAll();
+    let loggedInUser
+    if (req.session.auth) {
+        loggedInUser = req.session.auth.userId
+    }
 
-    res.render('posts', { posts });
+    res.render('posts', { posts, loggedInUser });
 }))
 
 // Task 37
@@ -63,7 +69,7 @@ router.post('/', csrfProtection, errorArray, titleCheck, async(req, res) => {
     console.log("body: ", req.body)
     const { title, content, subId } = req.body;
 
-    if (req.errors) {
+    if (req.errors.length > 0) {
         const subs = await Subbreaddit.findAll()
         res.render('create-post', { subs, csrfToken: req.csrfToken(), errors: req.errors, data: req.body })
     } else {
@@ -74,9 +80,19 @@ router.post('/', csrfProtection, errorArray, titleCheck, async(req, res) => {
             pinned: false,
             breadditorId: req.session.auth.userId
         })
-        res.redirect('/users')
+        res.redirect('/posts')
     }
 })
+
+router.delete('/:id', asyncHandler(async(req, res) => {
+    const post = await Post.findByPk(req.params.id)
+    if (post) {
+        await post.destroy()
+        res.json({message: 'Success'})
+    } else {
+        res.json({message: 'Fail'})
+    }
+}))
 
 
 module.exports = router;
