@@ -84,7 +84,7 @@ router.post('/', csrfProtection, errorArray, titleCheck, async(req, res) => {
     }
 })
 
-router.delete('/:id', asyncHandler(async(req, res) => {
+router.delete('/:id(\\d+)', asyncHandler(async(req, res) => {
     const post = await Post.findByPk(req.params.id)
     if (post) {
         await post.destroy()
@@ -95,7 +95,7 @@ router.delete('/:id', asyncHandler(async(req, res) => {
 }))
 
 router.put('/:id(\\d+)', asyncHandler(async (req, res) => {
-    // console.log('from put route handler: ', req.body)
+    console.log('from put route handler: ', req.body)
     const post = await Post.findByPk(req.params.id)
 
     post.title = req.body.title

@@ -5,7 +5,7 @@ console.log('Hello from your script')
 // send a fetch request to delete the correct post
 // remove post from page with successful response
 
-const deleteBtns = document.querySelectorAll('.edit-btn')
+const deleteBtns = document.querySelectorAll('.delete-btn')
 
 for (let i = 0; i < deleteBtns.length; i++) {
     const btn = deleteBtns[i];

@@ -4,10 +4,10 @@ block mainContent
     .all-posts-container
         each post in posts
             div(id=`post-container-${post.id}`).single-post-container
-                h2= post.title
-                p= post.content
+                h2(id=`${post.id}-title`)= post.title
+                p(id=`${post.id}-content`)= post.content
                 if loggedInUser === post.breadditorId
-                    button(class='edit-btn' id=`edit-post-${post.id}`) Delete
+                    button(class='delete-btn' id=`delete-post-${post.id}`) Delete
                     button(class="edit-btn" id=`edit-btn-${post.id}`) Edit
                     form(class='hidden' id=`edit-form-${post.id}`) 
                         label Title:
