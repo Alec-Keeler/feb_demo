@@ -94,5 +94,18 @@ router.delete('/:id', asyncHandler(async(req, res) => {
     }
 }))
 
+router.put('/:id(\\d+)', asyncHandler(async (req, res) => {
+    // console.log('from put route handler: ', req.body)
+    const post = await Post.findByPk(req.params.id)
+
+    post.title = req.body.title
+    post.content = req.body.content
+    await post.save()
+
+    res.json({
+        message: 'Success',
+        post
+    })
+}))
 
 module.exports = router;
