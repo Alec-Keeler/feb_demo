@@ -15,6 +15,7 @@ app.use(express.static('./public'))
 app.use(express.urlencoded({extended: false}))
 
 app.use(cookieParser('secretKey'))
+// Task 36a
 app.use(session({
     secret: 'secretKey',
     resave: false,

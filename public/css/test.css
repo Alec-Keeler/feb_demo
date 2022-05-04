@@ -1,3 +1,6 @@
 /* .test-class {
     background-color: red;
 } */
+.single-post-container {
+    border: 1px solid black;
+}

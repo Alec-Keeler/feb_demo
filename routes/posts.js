@@ -6,6 +6,14 @@ const csrf = require('csurf');
 
 const csrfProtection = csrf({cookie: true})
 
+// Task 38
+router.get('/', asyncHandler(async (req, res) => {
+    const posts = await Post.findAll();
+
+    res.render('posts', { posts });
+}))
+
+// Task 37
 const requireAuth = (req, res, next) => {
     if (req.session.auth) {
         next()

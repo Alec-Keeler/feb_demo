@@ -122,8 +122,10 @@ router.post('/login', csrfProtection, async (req, res) => {
     }
 })
 
+// Task 36c
 router.get('/logout', (req, res) => {
     delete req.session.auth
+    // Task 36d
     req.session.save(() => res.redirect('/users'))
     // res.redirect('/users')
 })
