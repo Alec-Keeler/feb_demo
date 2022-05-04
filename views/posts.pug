@@ -8,3 +8,10 @@ block mainContent
                 p= post.content
                 if loggedInUser === post.breadditorId
                     button(class='edit-btn' id=`edit-post-${post.id}`) Delete
+                    button(class="edit-btn" id=`edit-btn-${post.id}`) Edit
+                    form(class='hidden' id=`edit-form-${post.id}`) 
+                        label Title:
+                        input(type="text" name="title" value=post.title id=`${post.id}-edit-title`) 
+                        label Content:
+                        input(type="text" name="content" value=post.content id=`${post.id}-edit-content`) 
+                        button(class="edit-submit" id=`edit-submit-${post.id}`) Submit Edit
